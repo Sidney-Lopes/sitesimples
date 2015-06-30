@@ -1,5 +1,6 @@
 - As partes do site simples foram divididas em header, menu, index e footer
 - Os items do menu são arquivos(páginas) php chamados por GET
 - No index são chamados (inseridos) por require o header, o menu, o footer e as páginas correspondentes ao menu
-- Se o usuário tentar modificar a chamada GET para um arquivo que não existe, o index não apresenta erro apenas redireciona pra a página HOME
+- Todas as requisições são encaminhadas para o index.php pelo .htaccess
+- A função v_rota verifica se é uma rota valida na url, senão retorna "404 not found"
 - Na página de contato só será exibida a mensagem de sucesso, se todos os campos forem preenchidos
