@@ -8,7 +8,7 @@ $rotas = [
 ];
 
 function v_rota($path, $rotas){
-    if(in_array($path, $rotas)){
+    if(in_array($path, $rotas) && file_exists($path.".php")){
         return;
     }
     header('HTTP/1.0 404 Not Found');
