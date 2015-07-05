@@ -11,12 +11,22 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="home">Home</a></li>
-            <li><a href="empresa">Empresa</a></li>
-            <li><a href="produtos">Produtos</a></li>
-			<li><a href="servicos">Serviços</a></li>
-			<li><a href="contato">Contato</a></li>
-		  </ul>
+            <li <?php if($pagina == "home"):    ?>class="active"<?php endif;?>><a href="home">Home</a></li>
+            <li <?php if($pagina == "empresa"): ?>class="active"<?php endif;?>><a href="empresa">Empresa</a></li>
+            <li <?php if($pagina == "produtos"):?>class="active"<?php endif;?>><a href="produtos">Produtos</a></li>
+            <li <?php if($pagina == "servicos"):?>class="active"<?php endif;?>><a href="servicos">Serviços</a></li>
+            <li <?php if($pagina == "contato"): ?>class="active"<?php endif;?>><a href="contato">Contato</a></li>
+          </ul>
+
+            <form method="post" class="navbar-form navbar-left" role="search" action="/search">
+                <div class="form-group">
+                    <input name="q" type="text" class="form-control" placeholder="Localizar">
+                </div>
+                <button type="submit" class="btn btn-default">Vai !</button>
+            </form>
+
+
+
         </div><!--/.nav-collapse -->
       </div>
     </nav>

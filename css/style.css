@@ -13,3 +13,8 @@ footer{
 .input-group{
 	margin-bottom:15px;
 }
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+    background-color: #98050b;
+    color: #fff;
+}
