@@ -1,0 +1,32 @@
+.starter-template{
+	margin-top:100px;
+}
+
+footer{
+	color:#fff;
+	background-color:#000;
+	margin-top:20px;
+	text-align:center;
+	padding:10px;
+}
+
+.input-group{
+	margin-bottom:15px;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+    background-color: #98050b;
+    color: #fff;
+}
+
+#navbar p.navbar-text{
+    color: #fff;
+}
+.panel-footer{
+    color: #98050b;
+    font-weight: bold;
+}
+
+button#bt-salvar{
+    margin-top: 20px;
+}

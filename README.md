@@ -5,3 +5,9 @@
 - A função v_pagina(index) verifica se existe um conteudo no banco de dados com o apelido igual a pagina.
 - Se existir conteudo no banco content.php é chamado com formatação para artigo, se existir uma pagina estatica, estatica.php é chamado com formatação para estatica, se nenhum dos dois for encontrado 404.php é chamado com formatação própria.
 - Na página de contato só será exibida a mensagem de sucesso, se todos os campos forem preenchidos.
+
+- Area administrativa :
+- A area administrativa é acessada digitando /admin no final da URL.
+- Uma tela de login é mostrada  e nenhuma area administrativa do menu pode ser acessada antes da autenticação.
+- Após a autenticação o usuário é direcionado para o formulário de criação de um novo artigo e listar artigos tambem é liberado.
+- A qualquer momento o usuário pode ir para a home do site clicando no menu ou efetuar "logout" clicando em sair

@@ -1,6 +1,4 @@
 <?php
-require_once('configDB.php');
-
 $dsn = "{$DB['stringDB']}:dbname={$DB['banco']};host={$DB['host']};charset=utf8";
 $user = $DB['usuario'];
 $password = $DB['senha'];

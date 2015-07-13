@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 require_once('conexaoDB.php');
 
 function v_pagina($pagina, $con){

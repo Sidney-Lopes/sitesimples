@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 require_once('conexaoDB.php');
 
 $lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consectetur augue nec porta volutpat.
