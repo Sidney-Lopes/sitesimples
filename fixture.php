@@ -1,7 +1,5 @@
 <?php
-require_once('config.php');
-require_once('conexaoDB.php');
-
+// Variável com lorem ipsum só para ter conteudo
 $lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consectetur augue nec porta volutpat.
 Mauris mollis ipsum vel elit fringilla, porta rutrum tortor tempus. Proin condimentum ultrices nunc sit amet mollis.
 Morbi erat libero, blandit a augue eget, interdum gravida elit. Donec at placerat mauris.In pharetra nunc nec rhoncus
@@ -15,29 +13,71 @@ finibus sapien metus.Aliquam consectetur, tellus ut dictum fringilla, tortor tor
 libero dui id nulla.Aliquam non aliquet elit. Integer egestas egestas sapien nec rhoncus. Nulla a lobortis magna,
 sed volutpat nunc.";
 
-echo "========== FIXTURE - TABELA CONTEUDO ========== \n";
-echo "\n=> 'DROPANDO' TABELA ...\n";
-$con->query("DROP TABLE IF EXISTS conteudo;");
+// o SALT vai ser o md5 do próprio usuário, assim,  cada usuário vai ter um salt diferente.
+$option = [
+    'salt' => md5('admin')
+];
+$senha = password_hash("12345", PASSWORD_DEFAULT, $option);
+$usuario = password_hash("admin", PASSWORD_DEFAULT, $option);
 
-echo "=> CRIANDO TABELA ...\n";
-$con->query("CREATE TABLE `conteudo`
+/************************** CONEXÃO ***********************/
+require_once("config.php");
+$user = $DB['usuario'];
+$password = $DB['senha'];
+$dsn = "{$DB['stringDB']}:host={$DB['host']};charset=utf8";
+$conexao = new \PDO($dsn, $user, $password);
+/*********************************************************/
+
+echo "========== - INICIANDO FIXTURE - ========== \n\n";
+
+echo "=> DELETANDO BANCO DE DADOS {$DB['banco']} ...\n";
+$conexao->exec("DROP SCHEMA IF EXISTS {$DB['banco']}");
+
+echo "=> CRIANDO BANCO DE DADOS {$DB['banco']} ...\n";
+$conexao->exec("CREATE SCHEMA {$DB['banco']}");
+
+echo "=> SELECIONANDO BANCO DE DADOS {$DB['banco']} ...\n";
+$conexao->exec("USE {$DB['banco']}");
+
+echo "=> CRIANDO TABELA CONTEUDO ...\n";
+$conexao->query("CREATE TABLE `conteudo`
 (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `corpo` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `alias_UNIQUE` (`alias`)
 );
 ");
 
-echo "=> INSERINDO DADOS DE TESTE ...\n";
-$con->query("INSERT INTO `conteudo` VALUES
-(NULL,'Home','Texto do home {$lorem}','home'),
-(NULL,'Empresa','Texto da empresa {$lorem}','empresa'),
-(NULL,'Produtos','Texto do produto {$lorem}','produtos'),
-(NULL,'Serviços','Texto do serviço {$lorem}','servicos');
+echo "=> CRIANDO TABELA USUARIO ...\n";
+$conexao->query("CREATE TABLE `usuario`
+(
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  `usuario` varchar(100) NOT NULL,
+  `senha` varchar(100) NOT NULL,
+  `nome` varchar(60) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `status` varchar(2) NOT NULL,
+
+  UNIQUE KEY `usuario_UNIQUE` (`usuario`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+);
 ");
 
-echo "\n========== FIXTURE TERMINADA ! ================ \n";
+echo "=> INSERINDO DADOS DE TESTE ...\n\n";
+$conexao->query("INSERT INTO `usuario` VALUES (1,'{$usuario}','{$senha}','admin','admin@exemplo.com',1);");
+
+$conexao->query("INSERT INTO `conteudo` VALUES
+(NULL,'Home','Texto do home {$lorem}','home','1'),
+(NULL,'Empresa','Texto da empresa {$lorem}','empresa','1'),
+(NULL,'Produtos','Texto do produto {$lorem}','produtos','1'),
+(NULL,'Serviços','Texto do serviço {$lorem}','servicos','1');
+");
+
+
+echo "========== - FIXTURE TERMINADA ! - ======== \n";
 ?>

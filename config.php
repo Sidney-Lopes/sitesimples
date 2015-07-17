@@ -6,7 +6,7 @@ $base = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_
 $DB = [
     "stringDB" => "mysql",
     "host"     => "localhost",
-    "banco"    => "localDB",
+    "banco"    => "sitesimples",
     "usuario"  => "root",
     "senha"    => "371257"
 ]

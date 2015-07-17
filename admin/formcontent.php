@@ -37,13 +37,15 @@ if(isset($_POST['titulo']) && isset($_POST['corpo'])) {
 
     if (isset($artigo['id'])) {
         $sql_salvar = "update conteudo set titulo = '{$_POST['titulo']}', corpo = '{$_POST['corpo']}', alias = '{$alias}', usuario_id = '{$_SESSION['id']}'
-        where id = '{$artigo['id']}'";
+        where id = {$artigo['id']}";
     } else {
         $sql_salvar = "insert into conteudo (titulo, corpo, alias, usuario_id) VALUES ('{$_POST['titulo']}', '{$_POST['corpo']}', '{$alias}', '{$_SESSION['id']}')";
     }
+
     $stmt = $con->prepare($sql_salvar);
     $stmt->execute();
 
+    echo $sql_salvar;
     unset($_POST['titulo']);
     unset($_POST['corpo']);
     unset($segments['2']);
